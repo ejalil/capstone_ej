@@ -1,0 +1,50 @@
+---
+title: "WMTA"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(dplyr)
+```
+
+```{r}
+#going to do a year comparison of the daily ridership in metro riders before and after Trump's election
+#Going to do some basic filtering to try and determine patterns 
+
+daily_rider <- dr_Daily_Ridership_Data_View
+colnames(daily_rider) <- as.character(unlist(daily_rider[1, ]))  # Set first row as column names
+daily_rider <- daily_rider[-1, ]
+
+```
+
+```{r}
+#filter for only weekdays because those are the most likely days that people are going into work 
+colnames(daily_rider) <- tolower(gsub(" ", "_", colnames(daily_rider)))
+daily_rider_week <- daily_rider%>% 
+  filter(`weekday_/_saturday_/_sunday`=="Weekday")
+
+workweek_daily_rider <- daily_rider_week %>%
+  filter(holiday == "No" | date == "January 20, 2025")  
+
+
+```
+
+```{r}
+#Now I will be separating it to after Trump's innauguration and before
+
+trump_daily_rider <- workweek_daily_rider %>%
+  filter(date >= "January 20, 2025" & date <= "January 28, 2025")
+
+
+```
