@@ -44,7 +44,7 @@ workweek_daily_rider <- daily_rider_week %>%
 #Now I will be separating it to after Trump's innauguration and before
 
 trump_daily_rider <- workweek_daily_rider %>%
-  filter(date >= "January 20, 2025" & date <= "January 28, 2025")
+  filter(date <= "January 20, 2025" & date <= "February 4, 2025")
 
 
 ```
