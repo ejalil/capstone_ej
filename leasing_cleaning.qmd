@@ -1,7 +1,6 @@
 ---
-title: "leasing cleaning"
+title: "GSA Leasing Data Analysis"
 format: html
-editor: visual
 ---
 
 In this data notebook I will be analyzing GSA data that contains information regarding lease start and expiration dates, locations and representative info.
@@ -9,8 +8,9 @@ In this data notebook I will be analyzing GSA data that contains information reg
 ## Major Findings
 
 -   There is around 50 leases that will expire this year between Maryland and DC, 10 have already expired.
+-   There are 69 properties between Maryland and DC that are vacant: 18.5% of the properties are vacant.
 
-```{r}
+```{r, echo=FALSE, include=FALSE}
 #load libraries
 library(tidyverse)
 library(janitor)
@@ -21,7 +21,7 @@ library(tidyr)
 library(leaflet)
 ```
 
-```{r}
+```{r, echo=FALSE, include=FALSE}
 #Cleaning
 dc <- read.csv("data/dc.csv") %>% 
   clean_names()
@@ -34,9 +34,7 @@ maryland_lease <- maryland %>%
   filter(occupancy_right_desc=="Leased")
 ```
 
-I am now focusing on getting rid of the repeated rows of information that is found in both data sets.
-
-```{r}
+```{r, echo=FALSE, include=FALSE}
 #getting rid of unecessary rows
 dc_lease_cleaned <- dc_lease %>% 
  select(-c(walk_score,transit_score,representative_url,senator1_url,senator2_url)) 
@@ -49,23 +47,25 @@ maryland_lease_cleaned <-maryland_lease_cleaned %>%
   filter(lease_num != "")
 ```
 
-These are the cleaned Maryland and DC data tables that can be scrolled through and has a search button.
+### This is the cleaned Maryland database that is searchable and scrollable.
 
-```{r}
+```{r, echo=FALSE}
 datatable(maryland_lease_cleaned,  options = list(
   scrollX = TRUE,  # Enables horizontal scrolling
   autoWidth = TRUE # Adjusts column widths automatically
 ))
 ```
 
-```{r}
+### This is the cleaned DC database that is searchable and scrollable. 
+
+```{r, echo=FALSE}
 datatable(dc_lease_cleaned,  options = list(
   scrollX = TRUE,  # Enables horizontal scrolling
   autoWidth = TRUE # Adjusts column widths automatically
 ))
 ```
 
-```{r}
+```{r,echo=FALSE, include=FALSE}
 #separating the years so that I can determine when a lease is ending
 maryland_expiration <- maryland_lease_cleaned %>% 
   separate(lease_expiration_date, into = c("month", "day", "year"), sep = "/")
@@ -74,7 +74,7 @@ dc_expiration <- dc_lease_cleaned %>%
 
 ```
 
-```{r}
+```{r, echo=FALSE, include=FALSE}
 maryland_expiration <- maryland_expiration %>% 
   filter(year=="2025")
 dc_expiration <- dc_expiration %>% 
@@ -83,7 +83,9 @@ dc_expiration <- dc_expiration %>%
 #There are 28 leases that will expire in Maryland, five have already expired and one will expire by the end of this month. 
 ```
 
-```{r}
+### This map shows every leased property in Maryland and DC. 
+
+```{r, echo=FALSE}
 #making a combined data set for map
 all_leases <- bind_rows(
   dc_lease_cleaned %>% mutate(region = "DC"),
@@ -96,13 +98,14 @@ leaflet(all_leases) %>%
     color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
     radius = 3,
     fillOpacity = 0.7,
-    popup = ~paste("Region:", region,)
+    popup = ~paste("Region:", region, "<br>",
+                   "Street Address:", street_address)
   )
 ```
 
-This map shows the dispersion of the leases that will expire in 2025.
+### This map shows the dispersion of the leases that will expire in 2025 in DC and Maryland.
 
-```{r}
+```{r, echo=FALSE}
 all_leases_expiration <- all_leases %>% 
   mutate(
     lease_expiration_date = mdy(lease_expiration_date),  # Ensure it's in Date format
@@ -120,14 +123,16 @@ leaflet(all_leases_expiration) %>%
     color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
     radius = 3,
     fillOpacity = 0.7,
-    popup = ~paste("Lease expiration date:", lease_expiration_date)
+    popup = ~paste("Lease expiration date:", lease_expiration_date, "<br>",
+                   "Region:", region, "<br>",
+                   "Address:", street_address)
   )
 
 ```
 
-This map shows the dispersion of vacant properties.
+### This map shows the dispersion of vacant properties in DC and Maryland.
 
-```{r}
+```{r, echo=FALSE}
 all_leases_vacant <- all_leases %>% 
   filter(bld_vacant_rsf != 0)
 #there are 69 properies between Maryland and DC that have vacant space. Only 20 are from DC. 
@@ -138,7 +143,9 @@ leaflet(all_leases_vacant) %>%
     color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
     radius = 3,
     fillOpacity = 0.7,
-    popup = ~paste("Building vacancies:", bld_vacant_rsf)
+    popup = ~paste("Building vacancies square footage:", bld_vacant_rsf, "<br>",
+                   "Region", region, "<br>",
+                "Address:", street_address   )
   )
 
 ```
