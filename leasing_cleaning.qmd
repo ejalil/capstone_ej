@@ -4,26 +4,38 @@ format: html
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
 ```{r}
+#load libraries
 library(tidyverse)
 library(janitor)
+library(dplyr)
 ```
-
-You can add options to executable code like this
 
 ```{r}
+#Cleaning
+dc <- read.csv("data/dc.csv") %>% 
+  clean_names()
+maryland <- read.csv("data/maryland.csv") %>% 
+  clean_names()
+#Only leases
 dc_lease <- dc %>% 
-  filter(Occupancy_Right_Desc=="Leased")
+  filter(occupancy_right_desc=="Leased")
 maryland_lease <- maryland %>% 
-  filter(Occupancy_Right_Desc=="Leased")
+  filter(occupancy_right_desc=="Leased")
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+I am now focusing on getting rid of the repeated rows of information that is found in both data sets.
+
+```{r}
+#getting rid of unecessary rows
+dc_lease_cleaned <- dc_lease %>% 
+ select(-c(walk_score,transit_score,representative_url)) 
+maryland_lease_cleaned <- maryland_lease %>% 
+   select(-c(walk_score,transit_score,representative_url)) 
+#getting rid of the blanks in the final column
+dc_lease_cleaned<- dc_lease_cleaned %>%
+  filter(lease_num != "")
+maryland_lease_cleaned <-maryland_lease_cleaned %>% 
+  filter(lease_num != "")
+  
+```
