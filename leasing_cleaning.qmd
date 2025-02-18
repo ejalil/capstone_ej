@@ -46,7 +46,7 @@ maryland_lease_cleaned <-maryland_lease_cleaned %>%
   filter(lease_num != "")
 ```
 
-These are the cleaned data tables that can be scrolled through and has a search button.
+These are the cleaned Maryland and DC data tables that can be scrolled through and has a search button.
 
 ```{r}
 datatable(maryland_lease_cleaned,  options = list(
@@ -60,4 +60,8 @@ datatable(dc_lease_cleaned,  options = list(
   scrollX = TRUE,  # Enables horizontal scrolling
   autoWidth = TRUE # Adjusts column widths automatically
 ))
+```
+
+```{r}
+
 ```
