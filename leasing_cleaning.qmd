@@ -4,6 +4,12 @@ format: html
 editor: visual
 ---
 
+In this data notebook I will be analyzing GSA data that contains information regarding lease start and expiration dates, locations and representative info.
+
+## Major Findings
+
+-   
+
 ```{r}
 #load libraries
 library(tidyverse)
@@ -30,7 +36,7 @@ I am now focusing on getting rid of the repeated rows of information that is fou
 ```{r}
 #getting rid of unecessary rows
 dc_lease_cleaned <- dc_lease %>% 
- select(-c(walk_score,transit_score,representative_url)) 
+ select(-c(walk_score,transit_score,representative_url,senator1_url,senator2_url)) 
 maryland_lease_cleaned <- maryland_lease %>% 
    select(-c(walk_score,transit_score,representative_url)) 
 #getting rid of the blanks in the final column
@@ -39,6 +45,8 @@ dc_lease_cleaned<- dc_lease_cleaned %>%
 maryland_lease_cleaned <-maryland_lease_cleaned %>% 
   filter(lease_num != "")
 ```
+
+These are the cleaned data tables that can be scrolled through and has a search button.
 
 ```{r}
 datatable(maryland_lease_cleaned,  options = list(
