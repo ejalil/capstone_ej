@@ -9,6 +9,7 @@ editor: visual
 library(tidyverse)
 library(janitor)
 library(dplyr)
+library(DT)
 ```
 
 ```{r}
@@ -37,5 +38,18 @@ dc_lease_cleaned<- dc_lease_cleaned %>%
   filter(lease_num != "")
 maryland_lease_cleaned <-maryland_lease_cleaned %>% 
   filter(lease_num != "")
-  
+```
+
+```{r}
+datatable(maryland_lease_cleaned,  options = list(
+  scrollX = TRUE,  # Enables horizontal scrolling
+  autoWidth = TRUE # Adjusts column widths automatically
+))
+```
+
+```{r}
+datatable(dc_lease_cleaned,  options = list(
+  scrollX = TRUE,  # Enables horizontal scrolling
+  autoWidth = TRUE # Adjusts column widths automatically
+))
 ```
