@@ -8,7 +8,7 @@ In this data notebook I will be analyzing GSA data that contains information reg
 
 ## Major Findings
 
--   
+-   There is around 50 leases that will expire this year between Maryland and DC, 10 have already expired.
 
 ```{r}
 #load libraries
@@ -16,6 +16,9 @@ library(tidyverse)
 library(janitor)
 library(dplyr)
 library(DT)
+library(lubridate)
+library(tidyr)
+library(leaflet)
 ```
 
 ```{r}
@@ -63,5 +66,79 @@ datatable(dc_lease_cleaned,  options = list(
 ```
 
 ```{r}
+#separating the years so that I can determine when a lease is ending
+maryland_expiration <- maryland_lease_cleaned %>% 
+  separate(lease_expiration_date, into = c("month", "day", "year"), sep = "/")
+dc_expiration <- dc_lease_cleaned %>% 
+ separate(lease_expiration_date, into = c("month", "day", "year"), sep = "/")
+
+```
+
+```{r}
+maryland_expiration <- maryland_expiration %>% 
+  filter(year=="2025")
+dc_expiration <- dc_expiration %>% 
+  filter(year=="2025")
+#There are 21 leases that will expire this year in DC, five have already expired.
+#There are 28 leases that will expire in Maryland, five have already expired and one will expire by the end of this month. 
+```
+
+```{r}
+#making a combined data set for map
+all_leases <- bind_rows(
+  dc_lease_cleaned %>% mutate(region = "DC"),
+  maryland_lease_cleaned %>% mutate(region = "Maryland")
+)
+leaflet(all_leases) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude, 
+    color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
+    radius = 3,
+    fillOpacity = 0.7,
+    popup = ~paste("Region:", region,)
+  )
+```
+
+This map shows the dispersion of the leases that will expire in 2025.
+
+```{r}
+all_leases_expiration <- all_leases %>% 
+  mutate(
+    lease_expiration_date = mdy(lease_expiration_date),  # Ensure it's in Date format
+    month = month(lease_expiration_date),
+    day = day(lease_expiration_date),
+    year = year(lease_expiration_date)
+  )
+all_leases_expiration<- all_leases_expiration %>% 
+  filter(year=="2025")
+
+leaflet(all_leases_expiration) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude, 
+    color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
+    radius = 3,
+    fillOpacity = 0.7,
+    popup = ~paste("Lease expiration date:", lease_expiration_date)
+  )
+
+```
+
+This map shows the dispersion of vacant properties.
+
+```{r}
+all_leases_vacant <- all_leases %>% 
+  filter(bld_vacant_rsf != 0)
+#there are 69 properies between Maryland and DC that have vacant space. Only 20 are from DC. 
+leaflet(all_leases_vacant) %>%
+  addTiles() %>%
+  addCircleMarkers(
+    ~longitude, ~latitude, 
+    color = ~ifelse(region == "DC", "blue", "red"), # Different colors for DC & MD
+    radius = 3,
+    fillOpacity = 0.7,
+    popup = ~paste("Building vacancies:", bld_vacant_rsf)
+  )
 
 ```
