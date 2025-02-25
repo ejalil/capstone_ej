@@ -22,7 +22,8 @@ library(dplyr)
 #going to do a year comparison of the daily ridership in metro riders before and after Trump's election
 #Going to do some basic filtering to try and determine patterns 
 
-daily_rider <- dr_Daily_Ridership_Data_View
+daily_rider <- read.csv("data/daily_rider_data.csv") %>% 
+  clean_names()
 colnames(daily_rider) <- as.character(unlist(daily_rider[1, ]))  # Set first row as column names
 daily_rider <- daily_rider[-1, ]
 
@@ -43,8 +44,10 @@ workweek_daily_rider <- daily_rider_week %>%
 ```{r}
 #Now I will be separating it to after Trump's innauguration and before
 
-trump_daily_rider <- workweek_daily_rider %>%
-  filter(date <= "January 20, 2025" & date <= "February 4, 2025")
+workweek_daily_rider <- workweek_daily_rider %>%
+  mutate(date = as.Date(date, format = "%B %d, %Y"))  # Adjust format if needed
 
+trump_daily_rider <- workweek_daily_rider %>%
+  filter(date >= as.Date("2025-01-20") & date <= as.Date("2025-02-18"))
 
 ```
