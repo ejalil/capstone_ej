@@ -62,6 +62,6 @@ ggplot(trump_daily_rider, aes(x = date, y = grand_total)) +
 ```
 
 ```{r}
-str(trump_daily_rider$date)
-head(trump_daily_rider$date)
+write.csv(workweek_daily_rider,"~/Downloads/workweek_daily_rider.csv", row.names = FALSE)
+write.csv(daily_rider_week, "~/Downloads/workweek_daily_rider.csv",row.names = FALSE)
 ```
