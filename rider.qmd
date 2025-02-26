@@ -47,5 +47,21 @@ trump_daily_rider <- workweek_daily_rider %>%
 Now that I have multiple working data-sets with the information I need I can begin making bar charts and making an analysis.
 
 ```{r}
+library(ggplot2)
 
+ggplot(trump_daily_rider, aes(x = date, y = grand_total)) +
+  geom_col(fill = "steelblue") +
+  scale_x_date(date_breaks = "1 day", date_labels = "%b %d") +  # Ensures correct date scale
+  labs(title = "Grand Total Over Time",
+       x = "Date",
+       y = "Grand Total") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  
+
+
+```
+
+```{r}
+str(trump_daily_rider$date)
+head(trump_daily_rider$date)
 ```
