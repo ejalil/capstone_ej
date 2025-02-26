@@ -1,0 +1,36 @@
+---
+title: "fara"
+format: html
+editor: visual
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+#load libraries
+library(tidyverse)
+library(janitor)
+library(dplyr)
+library(DT)
+library(lubridate)
+library(tidyr)
+library(leaflet)
+```
+
+```{r}
+#load data sets
+fara <- read.csv("data/fara_docs.csv") %>% 
+  clean_names()
+```
+
+```{r}
+#I am now going to make this data set only last from 2012-2024
+fara_years <- fara %>% 
+  filter()
+```

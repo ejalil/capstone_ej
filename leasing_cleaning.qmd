@@ -21,6 +21,10 @@ library(tidyr)
 library(leaflet)
 ```
 
+```{r}
+getwd()
+```
+
 ```{r, echo=FALSE, include=FALSE}
 #Cleaning
 dc <- read.csv("data/dc.csv") %>% 
