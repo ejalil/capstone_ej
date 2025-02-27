@@ -27,9 +27,10 @@ getwd()
 
 ```{r, echo=FALSE, include=FALSE}
 #Cleaning
-dc <- read.csv("data/dc.csv") %>% 
-  clean_names()
-maryland <- read.csv("data/maryland.csv") %>% 
+maryland <- read.csv("data/dc.csv") %>% 
+  clean_names() %>% 
+  rename
+dc <- read.csv("data/maryland.csv") %>% 
   clean_names()
 #Only leases
 dc_lease <- dc %>% 
@@ -41,9 +42,9 @@ maryland_lease <- maryland %>%
 ```{r, echo=FALSE, include=FALSE}
 #getting rid of unecessary rows
 dc_lease_cleaned <- dc_lease %>% 
- select(-c(walk_score,transit_score,representative_url,senator1_url,senator2_url)) 
+ select(-c(walk_score,transit_score,representative_url)) 
 maryland_lease_cleaned <- maryland_lease %>% 
-   select(-c(walk_score,transit_score,representative_url)) 
+   select(-c(walk_score,transit_score,representative_url,senator1_url,senator2_url)) 
 #getting rid of the blanks in the final column
 dc_lease_cleaned<- dc_lease_cleaned %>%
   filter(lease_num != "")
@@ -152,4 +153,17 @@ leaflet(all_leases_vacant) %>%
                 "Address:", street_address   )
   )
 
+```
+
+### I will now figure out which representative is most affected by these terminated leases.
+
+```{r}
+#Most common representative for Maryland properties total
+total_representative_dc <- maryland_lease_cleaned %>% 
+  group_by(representative) %>% 
+  count()
+
+total_representative_maryland <- dc_lease_cleaned %>% 
+  group_by(representative) %>% 
+  count()
 ```
