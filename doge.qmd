@@ -1,0 +1,72 @@
+---
+title: "doge2"
+format: html
+editor: visual
+---
+
+```{r}
+library(httr)
+library(jsonlite)
+library(dplyr)
+
+# Initialize an empty list to store results
+all_data <- list()
+
+# Loop through all 68 pages
+for (page in 1:68) {
+  url <- paste0("https://api.doge.gov/savings/leases?sort_by=value&sort_order=asc&page=", page, "&per_page=400")
+  response <- GET(url)
+  
+  if (status_code(response) != 200) {
+    warning(paste("Failed to retrieve data on page", page, ":", status_code(response)))
+    next  # Skip this page if there's an error
+  }
+  
+  content_text <- content(response, as = "text", encoding = "UTF-8")
+  content_json <- fromJSON(content_text, flatten = TRUE)
+
+  # Check if JSON has data and is not empty
+  if (length(content_json) == 0 || !is.list(content_json)) {
+    warning(paste("Page", page, "returned an empty or invalid JSON response. Skipping."))
+    next
+  }
+
+  # Extract main data - Adjust this based on the actual structure
+  if ("data" %in% names(content_json)) {
+    data_page <- as.data.frame(content_json$data)
+  } else {
+    data_page <- as.data.frame(content_json)  # Fallback if no "data" key
+  }
+
+  # Ensure the dataframe is not empty
+  if (nrow(data_page) == 0) {
+    warning(paste("Page", page, "returned an empty dataframe. Skipping."))
+    next
+  }
+  
+  # Append to list
+ if (!is.null(data_page) && nrow(data_page) > 0) {
+  all_data[[length(all_data) + 1]] <- data_page
+  print(paste("Page", page, "retrieved successfully with", nrow(data_page), "rows"))
+} else {
+  warning(paste("Skipping Page", page, "due to empty or invalid data"))
+}
+
+# Ensure all data frames have the same columns
+if (length(all_data) > 0) {
+  common_cols <- Reduce(intersect, lapply(all_data, colnames))  # Get common column names
+  all_data <- lapply(all_data, function(df) df[, common_cols, drop = FALSE])  # Keep only common columns
+  
+  # Combine all non-empty data frames
+  full_data <- bind_rows(all_data)
+} else {
+  full_data <- data.frame()  # Return an empty dataframe if no data
+}
+
+# View final dataset
+print(paste("Final dataset contains", nrow(full_data), "rows"))
+
+
+
+
+```

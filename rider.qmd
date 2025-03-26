@@ -65,3 +65,18 @@ ggplot(trump_daily_rider, aes(x = date, y = grand_total)) +
 write.csv(workweek_daily_rider,"~/Downloads/workweek_daily_rider.csv", row.names = FALSE)
 write.csv(daily_rider_week, "~/Downloads/workweek_daily_rider.csv",row.names = FALSE)
 ```
+
+```{r}
+workweek_daily_rider$date <- as.Date(workweek_daily_rider$date, format = "%Y-%m-%d")
+filtered_data <- workweek_daily_rider %>%
+  filter(date >= as.Date("2020-01-01") & date <= as.Date("2025-12-31"))
+
+```
+
+```{r}
+workweek_daily_rider$rail <- as.numeric(gsub(",", "", workweek_daily_rider$rail))  # Remove commas
+workweek_daily_rider$rail <- as.numeric(trimws(workweek_daily_rider$rail))  # Trim spaces
+str(workweek_daily_rider)  # Check data types of all columns
+
+
+```

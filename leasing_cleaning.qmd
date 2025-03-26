@@ -21,10 +21,6 @@ library(tidyr)
 library(leaflet)
 ```
 
-```{r}
-getwd()
-```
-
 ```{r, echo=FALSE, include=FALSE}
 #Cleaning
 maryland <- read.csv("data/dc.csv") %>% 
@@ -61,7 +57,7 @@ datatable(maryland_lease_cleaned,  options = list(
 ))
 ```
 
-### This is the cleaned DC database that is searchable and scrollable. 
+### This is the cleaned DC database that is searchable and scrollable.
 
 ```{r, echo=FALSE}
 datatable(dc_lease_cleaned,  options = list(
@@ -88,7 +84,7 @@ dc_expiration <- dc_expiration %>%
 #There are 28 leases that will expire in Maryland, five have already expired and one will expire by the end of this month. 
 ```
 
-### This map shows every leased property in Maryland and DC. 
+### This map shows every leased property in Maryland and DC.
 
 ```{r, echo=FALSE}
 #making a combined data set for map
@@ -104,7 +100,8 @@ leaflet(all_leases) %>%
     radius = 3,
     fillOpacity = 0.7,
     popup = ~paste("Region:", region, "<br>",
-                   "Street Address:", street_address)
+                   "Street Address:", street_address, "<br>",
+                   "Representative:", representative)
   )
 ```
 
@@ -130,7 +127,8 @@ leaflet(all_leases_expiration) %>%
     fillOpacity = 0.7,
     popup = ~paste("Lease expiration date:", lease_expiration_date, "<br>",
                    "Region:", region, "<br>",
-                   "Address:", street_address)
+                   "Address:", street_address, "<br>",
+                   "Representative:", representative)
   )
 
 ```
@@ -150,20 +148,28 @@ leaflet(all_leases_vacant) %>%
     fillOpacity = 0.7,
     popup = ~paste("Building vacancies square footage:", bld_vacant_rsf, "<br>",
                    "Region", region, "<br>",
-                "Address:", street_address   )
+                "Address:", street_address, "<br>",
+                   "Representative:", representative )
   )
 
 ```
 
-### I will now figure out which representative is most affected by these terminated leases.
+### This is the breakdown of where the leases are located related to representatives.
+
+```{r,echo=FALSE}
+#Most common representative for Maryland properties total
+total_representative_maryland <- maryland_lease_cleaned %>% 
+  group_by(representative) %>% 
+  count() 
+
+print(total_representative_maryland)
+
+total_representative_dc <- dc_lease_cleaned %>% 
+  group_by(representative) %>% 
+  count()
+#Eleanor Norton is the representative that represents DC
+```
 
 ```{r}
-#Most common representative for Maryland properties total
-total_representative_dc <- maryland_lease_cleaned %>% 
-  group_by(representative) %>% 
-  count()
 
-total_representative_maryland <- dc_lease_cleaned %>% 
-  group_by(representative) %>% 
-  count()
 ```
