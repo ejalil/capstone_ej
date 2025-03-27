@@ -70,3 +70,28 @@ print(paste("Final dataset contains", nrow(full_data), "rows"))
 
 
 ```
+
+```{r}
+write.csv(full_data,"~/Downloads/doge.csv", row.names = FALSE)
+write.csv(maryland,"~/Downloads/maryland_doge.csv", row.names = FALSE)
+```
+
+```{r}
+colnames(full_data)
+```
+
+```{r}
+maryland <- full_data %>% 
+  clean_names()
+maryland <- maryland %>% 
+ mutate(state = sub(".*,\\s*", "", result_leases_location)) %>%  # Extract text after the comma
+  filter(state %in% c("MD", "DC"))  # Keep only Maryland & DC locations
+
+maryland <- maryland %>% 
+  distinct()
+#26 values
+```
+
+```{r}
+sum(maryland$result_leases_savings, na.rm = TRUE)
+```
