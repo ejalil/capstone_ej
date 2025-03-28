@@ -169,7 +169,3 @@ total_representative_dc <- dc_lease_cleaned %>%
   count()
 #Eleanor Norton is the representative that represents DC
 ```
-
-```{r}
-
-```
