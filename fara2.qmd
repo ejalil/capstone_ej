@@ -1,0 +1,15 @@
+---
+title: "FARA"
+format: html
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+
+```
+
+```{r}
+fara <- read.csv("fara.csv")
+```
