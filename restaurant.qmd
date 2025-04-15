@@ -7,7 +7,9 @@ editor: visual
 ```{r}
 library(osmdata)
 
-# Query OpenStreetMap for restaurants in Baltimore
+# Set a different Overpass server (this one is usually stable)
+set_overpass_url("https://overpass-api.de/api/interpreter")
+
 get_restaurants_by_city <- function(city) {
   opq(city) %>%
     add_osm_feature(key = "amenity", value = "restaurant") %>%
@@ -36,15 +38,16 @@ colnames(bmore_restaurants)
 ```{r}
 # Filter down to the good stuff
 bmore_restaurants_clean <- bmore_restaurants %>%
-  select(name, cuisine, `addr:street`, geometry)
+  select(name, cuisine, `addr:street`)
 
 # View the first few
 head(bmore_restaurants_clean)
 ```
 
 ```{r}
-bmore_restaurants_clean <- bmore_restaurants_clean %>%
-  filter(!if_all(-geometry, is.na))
+bmore_restaurants_clean2 <- bmore_restaurants_clean %>%
+  filter(!(is.na(name) & is.na(cuisine) & is.na(`addr:street`)))
+write.csv(bmore_restaurants_clean2,"~/Downloads/restaurant.csv", row.names = FALSE)
 ```
 
 ```{r}
