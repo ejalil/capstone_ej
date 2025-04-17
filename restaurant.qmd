@@ -5,61 +5,42 @@ editor: visual
 ---
 
 ```{r}
+library(tidyverse)
+library(janitor)
 library(osmdata)
-
-# Set a different Overpass server (this one is usually stable)
-set_overpass_url("https://overpass-api.de/api/interpreter")
-
-get_restaurants_by_city <- function(city) {
-  opq(city) %>%
-    add_osm_feature(key = "amenity", value = "restaurant") %>%
-    osmdata_sf()
-}
-
-restaurants_baltimore <- get_restaurants_by_city("Baltimore")
-```
-
-```{r}
-restaurants_baltimore$osm_points %>%
-  dplyr::select(name, geometry) %>%
-  head()
-```
-
-```{r}
+library(sf)
 library(dplyr)
-
-# Grab just the points layer
-bmore_restaurants <- restaurants_baltimore$osm_points
-
-# See what columns are available
-colnames(bmore_restaurants)
+library(ggplot2)
+library(tigris)
+library(lubridate)
 ```
 
 ```{r}
-# Filter down to the good stuff
-bmore_restaurants_clean <- bmore_restaurants %>%
-  select(name, cuisine, `addr:street`)
+# Step 1: Load Maryland counties shapefile
+md_counties <- counties(state = "MD", cb = TRUE, class = "sf")
 
-# View the first few
-head(bmore_restaurants_clean)
-```
+# Step 2: Build Overpass query for restaurants
+q <- opq(bbox = st_bbox(md_counties)) %>%
+  add_osm_feature(key = "amenity", value = "restaurant")
 
-```{r}
-bmore_restaurants_clean2 <- bmore_restaurants_clean %>%
-  filter(!(is.na(name) & is.na(cuisine) & is.na(`addr:street`)))
-write.csv(bmore_restaurants_clean2,"~/Downloads/restaurant.csv", row.names = FALSE)
-```
+# Step 3: Fetch restaurant data
+osm_restaurants <- osmdata_sf(q)
 
-```{r}
-montgomery_geom <- md_counties %>%
-  filter(COUNTY == "Montgomery") %>%
-  st_geometry()
-```
+# Step 4: Convert to sf POINTS layer
+restaurant_points <- osm_restaurants$osm_points
 
-```{r}
-get_restaurants_by_geom <- function(county_name, county_geom) {
-  # Your API or web scraping function here
-}
-restaurants_montgomery <- get_restaurants_by_geom("Montgomery", montgomery_geom)
+# Step 5: CRS fix — transform counties to match restaurant points
+md_counties <- st_transform(md_counties, st_crs(restaurant_points))
 
+# Step 6: Spatial join — assign each restaurant to a county
+restaurant_counties <- st_join(restaurant_points, md_counties, join = st_within)
+
+# Step 7: Count restaurants by county
+counts <- restaurant_counties %>%
+  st_drop_geometry() %>%
+  count(NAME) %>%
+  rename(county = NAME, restaurant_count = n)
+
+# Step 8: Print or plot results
+print(counts)
 ```

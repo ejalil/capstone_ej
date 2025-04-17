@@ -1,0 +1,9 @@
+title,Location of tree cover in Maryland, United States
+threshold,30
+decile,30
+extent_year,2010
+unit,ha
+page_size,5
+date_downloaded,2025-04-17
+metadata,https://api.resourcewatch.org/v1/gfw-metadata/widget_tree_cover
+link,https://www.globalforestwatch.org/dashboards/country/USA/21/

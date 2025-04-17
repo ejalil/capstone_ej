@@ -1,0 +1,8 @@
+title,Cumulative Fire Alerts in Maryland, United States
+dataset,viirs
+confidence,h
+start_date_absolute,2025_01_17
+end_date_absolute,2025_04_17
+date_downloaded,2025-04-17
+metadata,https://api.resourcewatch.org/v1/gfw-metadata/widget_fire_alert_location
+link,https://www.globalforestwatch.org/dashboards/country/USA/21/
