@@ -16,31 +16,58 @@ library(lubridate)
 ```
 
 ```{r}
-# Step 1: Load Maryland counties shapefile
-md_counties <- counties(state = "MD", cb = TRUE, class = "sf")
 
-# Step 2: Build Overpass query for restaurants
-q <- opq(bbox = st_bbox(md_counties)) %>%
+options(tigris_use_cache = TRUE)
+
+# Step 1: Get Maryland counties (as sf)
+md_counties <- counties(state = "MD", cb = TRUE, class = "sf")
+print("Loaded Maryland counties:")
+print(md_counties$NAME)
+
+# Step 2: Query OSM for restaurants within the bounding box of MD counties
+bbox_md <- st_bbox(md_counties)
+
+q <- opq(bbox = bbox_md) %>%
   add_osm_feature(key = "amenity", value = "restaurant")
 
-# Step 3: Fetch restaurant data
 osm_restaurants <- osmdata_sf(q)
 
-# Step 4: Convert to sf POINTS layer
+# Step 3: Extract only the point features (most restaurants are mapped as points)
 restaurant_points <- osm_restaurants$osm_points
 
-# Step 5: CRS fix — transform counties to match restaurant points
+# Inspect what we got
+cat("Number of restaurant points downloaded:", nrow(restaurant_points), "\n")
+print(head(restaurant_points[, c("name", "amenity")]))
+
+# Step 4: Make sure CRS matches — transform counties to match restaurant points
 md_counties <- st_transform(md_counties, st_crs(restaurant_points))
 
-# Step 6: Spatial join — assign each restaurant to a county
-restaurant_counties <- st_join(restaurant_points, md_counties, join = st_within)
+# Step 5: Spatial join — assign each restaurant point to a county
+restaurant_with_county <- st_join(restaurant_points, md_counties, join = st_within)
 
-# Step 7: Count restaurants by county
-counts <- restaurant_counties %>%
+# Step 6: Remove rows with NA values in the county name (if any restaurants don't match)
+restaurant_with_county_clean <- restaurant_with_county %>%
+  filter(!is.na(NAME))
+
+# Check how many rows are left after cleaning
+cat("Number of restaurants after removing NA county values:", nrow(restaurant_with_county_clean), "\n")
+
+# Step 7: Count restaurants per county (now that we've removed NA counties)
+restaurant_counts <- restaurant_with_county_clean %>%
   st_drop_geometry() %>%
-  count(NAME) %>%
-  rename(county = NAME, restaurant_count = n)
+  group_by(NAME) %>%
+  summarise(restaurant_count = n()) %>%
+  arrange(desc(restaurant_count))
 
-# Step 8: Print or plot results
-print(counts)
+# Step 8: Print result
+print("Restaurant counts by county:")
+print(restaurant_counts)
+
+# Step 9 (Optional): Visualize as a bar chart
+ggplot(restaurant_counts, aes(x = reorder(NAME, -restaurant_count), y = restaurant_count)) +
+  geom_col(fill = "#4682B4") +
+  labs(title = "Number of Restaurants per County in Maryland (from OSM)",
+       x = "County", y = "Number of Restaurants") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
