@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Scrollytelling</title>
+	<meta name="description" content="A starter scrollytelling layout with linked CSS and JavaScript.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<main class="page">
+		<section class="hero">
+			<p class="eyebrow">Scrollytelling</p>
+			<h1>Build a narrative that changes as the reader moves.</h1>
+			<p class="lede">
+				This starter includes a responsive layout, sticky story panel, and a simple
+				scroll interaction hook for your own content.
+			</p>
+			<div class="hero-actions">
+				<a class="button button-primary" href="#story">Explore the story</a>
+				<a class="button button-secondary" href="#notes">Notes</a>
+			</div>
+		</section>
+
+		<section class="story-grid" id="story">
+			<aside class="visual-panel" aria-label="Story visual">
+				<div class="visual-card">
+					<div class="visual-orb visual-orb-one"></div>
+					<div class="visual-orb visual-orb-two"></div>
+					<div class="visual-orb visual-orb-three"></div>
+					<p class="visual-label">Scroll to activate steps</p>
+				</div>
+			</aside>
+
+			<div class="steps" id="steps">
+				<article class="step is-active" data-step="1">
+					<p class="step-kicker">01</p>
+					<h2>Set the scene</h2>
+					<p>Introduce the topic with a strong headline, short paragraph, and one visual idea.</p>
+				</article>
+				<article class="step" data-step="2">
+					<p class="step-kicker">02</p>
+					<h2>Reveal the shift</h2>
+					<p>As the user scrolls, swap the emphasis, color, or supporting data to move the story forward.</p>
+				</article>
+				<article class="step" data-step="3">
+					<p class="step-kicker">03</p>
+					<h2>Close with impact</h2>
+					<p>End with a takeaway, call to action, or summary that leaves the reader with one clear idea.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="notes" id="notes">
+			<h2>What’s included</h2>
+			<p>
+				The CSS handles layout, spacing, and visual style. The JavaScript adds an active state
+				to the step currently closest to the viewport.
+			</p>
+		</section>
+	</main>
+
+	<script src="script.js"></script>
+</body>
+</html>
