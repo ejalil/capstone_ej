@@ -8,59 +8,194 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 	<main class="page">
 		<section class="hero">
-			<p class="eyebrow">Scrollytelling</p>
-			<h1>Build a narrative that changes as the reader moves.</h1>
-			<p class="lede">
-				This starter includes a responsive layout, sticky story panel, and a simple
-				scroll interaction hook for your own content.
-			</p>
-			<div class="hero-actions">
-				<a class="button button-primary" href="#story">Explore the story</a>
-				<a class="button button-secondary" href="#notes">Notes</a>
+			<div class="hero-frame" aria-hidden="true">
+				<img src="AdobeStock_580573957.png" alt="" class="hero-image">
+			</div>
+			<div class="hero-copy">
+				<h1>Prominent Asian Americans and Pacific Islanders with connections to Maryland</h1>
+				<p class="lede">
+					By Ela Jalil
+				</p>
 			</div>
 		</section>
 
+
+
 		<section class="story-grid" id="story">
-			<aside class="visual-panel" aria-label="Story visual">
+			<!-- <aside class="visual-panel" aria-label="Story visual">
 				<div class="visual-card">
-					<div class="visual-orb visual-orb-one"></div>
-					<div class="visual-orb visual-orb-two"></div>
-					<div class="visual-orb visual-orb-three"></div>
-					<p class="visual-label">Scroll to activate steps</p>
 				</div>
-			</aside>
+			</aside> -->
 
 			<div class="steps" id="steps">
 				<article class="step is-active" data-step="1">
-					<p class="step-kicker">01</p>
-					<h2>Set the scene</h2>
-					<p>Introduce the topic with a strong headline, short paragraph, and one visual idea.</p>
-				</article>
-				<article class="step" data-step="2">
-					<p class="step-kicker">02</p>
-					<h2>Reveal the shift</h2>
-					<p>As the user scrolls, swap the emphasis, color, or supporting data to move the story forward.</p>
-				</article>
-				<article class="step" data-step="3">
-					<p class="step-kicker">03</p>
-					<h2>Close with impact</h2>
-					<p>End with a takeaway, call to action, or summary that leaves the reader with one clear idea.</p>
-				</article>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+  <p class="intro-lede">In May, Asian American and Pacific Islander's celebrate Asian American History Month around the country. Asian Americans hold a precarious position in America, as both immigrants that are upheld as the model minority but also people of color that face discrimination. Quote from Prof. Wong on why this is important.</p>
+</article>			</div>
+		</section>
+		<section class="photo-scroll">
+			<div class="photo-scroll-sticky">
+				<div class="photo-visual" id="photo-visual" data-state="state-1">
+					<figure class="photo-fig photo-fig-1">
+						<img src="clipping%20(1).jpg" alt="Historical photo 1">
+					</figure>
+					<figure class="photo-fig photo-fig-2">
+						<img src="clipping%20(2).jpg" alt="Historical photo 2">
+					</figure>
+					<blockquote class="photo-pullquote">
+						&#8220;Your pull quote goes here.&#8221;
+					</blockquote>
+				</div>
+			</div>
+			<div class="photo-scroll-steps">
+				<div class="photo-step" data-visual="state-1">
+					<p>Text block for the first photo goes here.</p>
+				</div>
+				<div class="photo-step" data-visual="state-2">
+					<p>Text block for the second photo goes here.</p>
+				</div>
+				<div class="photo-step" data-visual="state-3">
+					<p>Text about both photos together goes here.</p>
+				</div>
+				<div class="photo-step" data-visual="state-4"></div>
+			</div>
+			<p class="intro-lede photo-scroll-lede">In May, Asian American and Pacific Islander's celebrate Asian American History Month around the country. Asian Americans hold a precarious position in America, as both immigrants that are upheld as the model minority but also people of color that face discrimination. Quote from Prof. Wong on why this is important.</p>
+		</section>
+
+		<section class="people-nav" id="people-nav">
+			<div class="people-circles">
+				<a href="#person-1" class="circle-btn" data-ring="blue" aria-label="Jump to Susan Lee">
+				<span class="circle-photo"><img src="Lee%2C%20Susan%20headshot%20(1).jpg" alt="Susan Lee"></span>
+			</a>
+			<a href="#person-2" class="circle-btn" data-ring="red" aria-label="Jump to Rei Ami">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-3" class="circle-btn" data-ring="green" aria-label="Jump to Steve Chu">
+				<span class="circle-photo"><img src="2D12BB59-3C8A-4B9C-A4EB-F4B1E0BC09EC.jpg" alt="Steve Chu"></span>
+			</a>
+			<a href="#person-4" class="circle-btn" data-ring="pink" aria-label="Jump to Yumi Hogan">
+				<span class="circle-photo"><img src="YumiHogan_photo%20(1).png" alt="Yumi Hogan"></span>
+			</a>
+			<a href="#person-5" class="circle-btn" data-ring="orange" aria-label="Jump to Person Five">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-6" class="circle-btn" data-ring="lavender" aria-label="Jump to Person Six">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-7" class="circle-btn" data-ring="green" aria-label="Jump to Person Seven">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-8" class="circle-btn" data-ring="orange" aria-label="Jump to Person Eight">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-9" class="circle-btn" data-ring="red" aria-label="Jump to Person Nine">
+				<span class="circle-photo"></span>
+			</a>
+			<a href="#person-10" class="circle-btn" data-ring="blue" aria-label="Jump to Person Ten">
+				<span class="circle-photo"></span>
+			</a>
 			</div>
 		</section>
 
-		<section class="notes" id="notes">
-			<h2>What’s included</h2>
-			<p>
-				The CSS handles layout, spacing, and visual style. The JavaScript adds an active state
-				to the step currently closest to the viewport.
-			</p>
+		<div class="circle-legend">
+			<span class="legend-item" data-ring="blue"><span class="legend-swatch"></span>Entertainment</span>
+			<span class="legend-item" data-ring="red"><span class="legend-swatch"></span>Food Industry</span>
+			<span class="legend-item" data-ring="green"><span class="legend-swatch"></span>Journalism</span>
+			<span class="legend-item" data-ring="pink"><span class="legend-swatch"></span>Politics</span>
+			<span class="legend-item" data-ring="orange"><span class="legend-swatch"></span>Arts</span>
+			<span class="legend-item" data-ring="lavender"><span class="legend-swatch"></span>Model</span>
+		</div>
+
+		<section class="bio-section" id="person-1">
+			<h2 class="bio-name">Susan Lee</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Susan Lee coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
 		</section>
+
+		<section class="bio-section" id="person-2">
+			<h2 class="bio-name">Rei Ami</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Rei Ami coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-3">
+			<h2 class="bio-name">Steve Chu</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Steve Chu coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-4">
+			<h2 class="bio-name">Yumi Hogan</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Yumi Hogan coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-5">
+			<h2 class="bio-name">Football Player</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Five coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-6">
+			<h2 class="bio-name">Tae Strain</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Six coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-7">
+			<h2 class="bio-name">Utkarsh Ambudhakar</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Seven coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-8">
+			<h2 class="bio-name">Bailey Anne Kennedy</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Eight coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-9">
+			<h2 class="bio-name">Connie Chung</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Nine coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-10">
+			<h2 class="bio-name">Aruna Miller</h2>
+			<div class="bio-card">
+				<p class="bio-text">Bio for Person Ten coming soon.</p>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
 	</main>
 
 	<script src="script.js"></script>
