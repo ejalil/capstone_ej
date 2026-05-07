@@ -152,7 +152,7 @@ h1 {
   margin-inline: auto;
 }
 .intro-lede {
-  text-align: center;
+  text-align: left;
   font-family: Georgia, serif;
   color: #3d5a5e;
   font-size: clamp(1.05rem, 2vw, 1.3rem);
@@ -655,9 +655,9 @@ h1 {
 }
 
 .photo-step p {
-  font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-  font-family: 'Space Grotesk', sans-serif;
-  line-height: 1.75;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  font-family: Georgia, serif;
+  line-height: 1.7;
   color: #3d5a5e;
   max-width: 28ch;
   background: rgba(255, 255, 255, 0.88);
