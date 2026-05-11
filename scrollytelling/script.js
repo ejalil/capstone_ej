@@ -39,24 +39,3 @@ if (photoVisual && photoSteps.length > 0) {
 }
 
 
-// Legend filter
-const legendItems = document.querySelectorAll('.legend-item');
-const circleBtns  = document.querySelectorAll('.circle-btn');
-
-legendItems.forEach((item) => {
-  item.addEventListener('click', () => {
-    const ring     = item.dataset.ring;
-    const isActive = item.classList.contains('active');
-
-    // Reset everything
-    legendItems.forEach((l) => l.classList.remove('active'));
-    circleBtns.forEach((btn) => btn.classList.remove('faded'));
-
-    if (!isActive) {
-      item.classList.add('active');
-      circleBtns.forEach((btn) => {
-        if (btn.dataset.ring !== ring) btn.classList.add('faded');
-      });
-    }
-  });
-});

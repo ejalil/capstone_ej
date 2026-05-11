@@ -65,6 +65,7 @@ a {
   text-align: center;
 }
 
+
 /* .hero-copy {
   width: min(820px, calc(100% - 24px));
   position: absolute;
@@ -429,60 +430,57 @@ h1 {
 .people-circles {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 24px;
-  max-width: 900px;
+  gap: 32px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .circle-btn {
-  display: block;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  border-radius: 0;
+  padding: 0;
   cursor: pointer;
   text-decoration: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.3s ease;
 }
 
-.circle-btn.faded {
-  opacity: 0.15;
-  pointer-events: none;
+.circle-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid #dda6ae;
+  overflow: hidden;
+  background: #b8e8f4;
+  box-sizing: border-box;
 }
+
 
 .circle-btn:hover {
   transform: scale(1.08);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
 }
 
-.circle-photo {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #b8e8f4;
-  overflow: hidden;
-}
+
 
 .circle-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+  display: block;
 }
 
-/* Ring colors */
-.circle-btn[data-ring="blue"]     { background: #6bcde5; }
-.circle-btn[data-ring="red"]      { background: #e05252; }
-.circle-btn[data-ring="green"]    { background: #72c96e; }
-.circle-btn[data-ring="pink"]     { background: #e87bb0; }
-.circle-btn[data-ring="orange"]   { background: #f0a050; }
-.circle-btn[data-ring="lavender"] { background: #b07de8; }
+
 
 /* =====================
    BIO SECTIONS
    ===================== */
 
 .bio-section {
+  position: relative;
   padding: 80px 0 48px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   scroll-margin-top: 32px;
@@ -500,14 +498,33 @@ h1 {
 }
 
 .bio-card {
+  position: relative;
   min-height: 220px;
-  background: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  padding: 28px 32px;
+  padding: 28px 110px 28px 32px;
+  overflow: hidden;
+}
+
+.bio-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 95px;
+  height: 100%;
+  background: url('AdobeStock_1893741205_vertical.png') repeat-y right top / 95px auto;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bio-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .bio-text {
-  color: var(--muted);
+  color: #3d5a5e;
   font-size: 1.05rem;
   line-height: 1.75;
   max-width: 60ch;
@@ -515,8 +532,8 @@ h1 {
 
 @media (max-width: 640px) {
   .people-circles {
-    gap: 14px;
-    max-width: 520px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 }
 
@@ -525,16 +542,16 @@ h1 {
    (matches each person's ring color)
    ===================== */
 
-#person-1  .bio-card { background: rgba(107, 205, 229, 0.22); } /* blue   */
-#person-2  .bio-card { background: rgba(224,  82,  82, 0.22); } /* red    */
-#person-3  .bio-card { background: rgba(114, 201, 110, 0.22); } /* green  */
-#person-4  .bio-card { background: rgba(232, 123, 176, 0.22); } /* pink   */
-#person-5  .bio-card { background: rgba(240, 160,  80, 0.22); } /* orange */
-#person-6  .bio-card { background: rgba(176, 125, 232, 0.22); } /* lavender */
-#person-7  .bio-card { background: rgba(114, 201, 110, 0.22); } /* green  */
-#person-8  .bio-card { background: rgba(240, 160,  80, 0.22); } /* orange */
-#person-9  .bio-card { background: rgba(224,  82,  82, 0.22); } /* red    */
-#person-10 .bio-card { background: rgba(107, 205, 229, 0.22); } /* blue   */
+
+
+
+
+
+
+
+
+
+
 
 /* =====================
    PHOTO SCROLLYTELLING
@@ -687,56 +704,6 @@ h1 {
 }
 
 /* =====================
-   CIRCLE LEGEND
-   ===================== */
-
-.circle-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  justify-content: center;
-  margin: 20px auto 48px;
-  max-width: 700px;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  color: #3d5a5e;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  user-select: none;
-  transition: opacity 0.2s ease;
-}
-
-.legend-item:hover {
-  opacity: 0.75;
-}
-
-.legend-item.active .legend-swatch {
-  outline: 3px solid #3d5a5e;
-  outline-offset: 2px;
-}
-
-.legend-swatch {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.legend-item[data-ring="blue"]     .legend-swatch { background: #6bcde5; }
-.legend-item[data-ring="red"]      .legend-swatch { background: #e05252; }
-.legend-item[data-ring="green"]    .legend-swatch { background: #72c96e; }
-.legend-item[data-ring="pink"]     .legend-swatch { background: #e87bb0; }
-.legend-item[data-ring="orange"]   .legend-swatch { background: #f0a050; }
-.legend-item[data-ring="lavender"] .legend-swatch { background: #b07de8; }
-
-/* =====================
    BACK TO CIRCLES LINK
    ===================== */
 
@@ -758,4 +725,72 @@ h1 {
 .back-to-circles:hover {
   opacity: 1;
   gap: 10px;
+}
+
+.circle-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+  font-weight: 500;
+  color: #3d5a5e;
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+
+/* =====================
+   BIO DETAILS
+   ===================== */
+
+.bio-details {
+  margin: 16px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 20px;
+  align-items: baseline;
+}
+
+.bio-details dt {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #3d5a5e;
+  white-space: nowrap;
+}
+
+.bio-details dd {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 0.95rem;
+  color: #3d5a5e;
+  line-height: 1.5;
+}
+
+/* =====================
+   BIO NAME FLOWER
+   ===================== */
+
+#person-1 .bio-card,
+#person-2 .bio-card,
+#person-3 .bio-card,
+#person-4 .bio-card,
+#person-5 .bio-card { background-color: rgba(114, 201, 110, 0.22); }
+
+/* =====================
+   PETAL SCATTER
+   ===================== */
+
+.petal-scatter {
+  position: relative;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  height: 180px;
+  margin-top: -40px;
+  pointer-events: none;
+  z-index: 10;
+  overflow: visible;
+}
+
+.petal {
+  position: absolute;
+  object-fit: contain;
+  opacity: 0.9;
 }
