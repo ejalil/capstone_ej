@@ -671,6 +671,10 @@ h1 {
   min-height: 70vh;
 }
 
+.photo-step-buffer {
+  min-height: 80vh;
+}
+
 .photo-step p {
   font-size: clamp(1.05rem, 2vw, 1.3rem);
   font-family: Georgia, serif;
