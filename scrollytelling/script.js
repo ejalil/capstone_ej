@@ -38,4 +38,46 @@ if (photoVisual && photoSteps.length > 0) {
   photoSteps.forEach((step) => photoObserver.observe(step));
 }
 
+const peopleNav = document.querySelector('.people-nav');
+const circleButtons = Array.from(document.querySelectorAll('.circle-btn[data-person]'));
+const visitedCirclesKey = 'scrollytelling.visitedCircles';
+const peopleNavArrow = document.querySelector('.people-nav-arrow');
+
+let visitedCircles = new Set();
+
+try {
+  visitedCircles = new Set(JSON.parse(sessionStorage.getItem(visitedCirclesKey) || '[]'));
+} catch (error) {
+  visitedCircles = new Set();
+}
+
+function syncPeopleNavArrow() {
+  const allVisited = circleButtons.length > 0 && circleButtons.every((button) => visitedCircles.has(button.dataset.person));
+
+  if (peopleNav) {
+    peopleNav.classList.toggle('is-unlocked', allVisited);
+  }
+
+  if (peopleNavArrow) {
+    peopleNavArrow.setAttribute('aria-hidden', String(!allVisited));
+    peopleNavArrow.tabIndex = allVisited ? 0 : -1;
+  }
+}
+
+circleButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    visitedCircles.add(button.dataset.person);
+
+    try {
+      sessionStorage.setItem(visitedCirclesKey, JSON.stringify(Array.from(visitedCircles)));
+    } catch (error) {
+      /* no-op */
+    }
+
+    syncPeopleNavArrow();
+  });
+});
+
+syncPeopleNavArrow();
+
 

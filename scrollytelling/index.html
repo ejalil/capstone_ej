@@ -2,23 +2,25 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Scrollytelling</title>
-	<meta name="description" content="A starter scrollytelling layout with linked CSS and JavaScript.">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
-</head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div id="nav-logo">
+			<a class="navbar-brand" href="http://cnsmaryland.org/">
+				<img src="logo.png" id="logo">
+			</a>
+		</div>
+	</nav>
 	<main class="page">
 		<section class="hero">
 			<div class="hero-frame" aria-hidden="true">
 				<img src="AdobeStock_580573957.png" alt="" class="hero-image">
 			</div>
 			<div class="hero-copy">
-				<h1>Prominent Asian Americans and Pacific Islanders with connections to Maryland</h1>
+				<h1>Prominent <span class="headline-nowrap">Asian Americans</span> with connections to Maryland</h1>
 				<p class="lede">
 					By Ela Jalil
 				</p>
@@ -40,7 +42,7 @@
 					<br>
   <p class="intro-lede">Members of the Asian American Pacific Islander community in Maryland have broken barriers across the state and the country.</p> 
   <br>
-  <p class="intro-lede"> Whether it’s being the first in some of the highest positions in state politics, to creating a rapidly growing restaurant chain that infuses Asian culture into its dishes, this May celebrates the accomplishments of the AAPI community. 
+  <p class="intro-lede"> Whether it’s being the first in some of the highest positions in state politics, to creating a rapidly expanding restaurant that infuses Asian culture into its dishes, this May celebrates the accomplishments of the AAPI community. 
  </p>
 <br>
   <p class="intro-lede"> 
@@ -61,8 +63,8 @@ In 1992, Congress passed legislation which permanently designated every May to b
 						<img src="clipping%20(2).jpg" alt="Historical photo 2">
 					</figure>
 					<blockquote class="photo-pullquote">
-						&#8220;“It's hard to understand these other famous people who've come through or prominent Asian Americans without…also thinking about that.”
-&#8221;
+						<p class="photo-pullquote-text">&#8220;It's hard to understand these other famous people who've come through or prominent Asian Americans without…also thinking about that.&#8221;</p>
+						<p class="photo-pullquote-attribution">&mdash; Professor Janelle Wong</p>
 					</blockquote>
 				</div>
 			</div>
@@ -91,26 +93,32 @@ In 1992, Congress passed legislation which permanently designated every May to b
 			<br>
 			<br>
 			<div class="people-circles">
-				<a href="#person-1" class="circle-btn" data-ring="blue" aria-label="Jump to Susan Lee">
-				<span class="circle-photo"><img src="Lee%2C%20Susan%20headshot%20(1).jpg" alt="Susan Lee"></span>
-				<span class="circle-name">Susan Lee</span>
-			</a>
-			<a href="#person-2" class="circle-btn" data-ring="red" aria-label="Jump to Rei Ami">
-				<span class="circle-photo"><img src="LG%20Official%20Headshot%202024%20(1).jpg" alt="Rei Ami"></span>
-				<span class="circle-name">Rei Ami</span>
-			</a>
-			<a href="#person-3" class="circle-btn" data-ring="green" aria-label="Jump to Steve Chu">
-				<span class="circle-photo"><img src="2D12BB59-3C8A-4B9C-A4EB-F4B1E0BC09EC.jpg" alt="Steve Chu"></span>
-				<span class="circle-name">Steve Chu</span>
-			</a>
-			<a href="#person-4" class="circle-btn" data-ring="pink" aria-label="Jump to Yumi Hogan">
-				<span class="circle-photo"><img src="YumiHogan_photo%20(1).png" alt="Yumi Hogan"></span>
-				<span class="circle-name">Yumi Hogan</span>
-			</a>
-			<a href="#person-5" class="circle-btn" data-ring="orange" aria-label="Jump to Person Five">
-				<span class="circle-photo"><img src="tae.jpeg" alt="Person Five"></span>
-				<span class="circle-name">Tae Strain</span>
-			</a>
+				<a href="#person-1" class="circle-btn" data-ring="blue" data-person="person-1" aria-label="Jump to Susan Lee">
+					<span class="circle-photo"><img src="Lee%2C%20Susan%20headshot%20(1).jpg" alt="Susan Lee"></span>
+					<span class="circle-name">Susan Lee</span>
+				</a>
+				<a href="#person-3" class="circle-btn" data-ring="green" data-person="person-3" aria-label="Jump to Steve Chu">
+					<span class="circle-photo"><img src="2D12BB59-3C8A-4B9C-A4EB-F4B1E0BC09EC.jpg" alt="Steve Chu"></span>
+					<span class="circle-name">Steve Chu</span>
+				</a>
+				<a href="#person-2" class="circle-btn" data-ring="red" data-person="person-2" aria-label="Jump to Aruna Miller">
+					<span class="circle-photo"><img src="LG%20Official%20Headshot%202024%20(1).jpg" alt="Aruna Miller"></span>
+					<span class="circle-name">Aruna Miller</span>
+				</a>
+				<a href="#person-5" class="circle-btn" data-ring="orange" data-person="person-5" aria-label="Jump to Tae Strain">
+					<span class="circle-photo"><img src="tae.jpeg" alt="Tae Strain"></span>
+					<span class="circle-name">Tae Strain</span>
+				</a>
+				<a href="#person-4" class="circle-btn" data-ring="pink" data-person="person-4" aria-label="Jump to Yumi Hogan">
+					<span class="circle-photo"><img src="YumiHogan_photo%20(1).png" alt="Yumi Hogan"></span>
+					<span class="circle-name">Yumi Hogan</span>
+				</a>
+			</div>
+			<div class="people-nav-cta">
+				<p class="people-nav-cta-label">check out more</p>
+				<a href="#future-aapi" class="people-nav-arrow" aria-label="Jump to more AAPI individuals to look out for">
+					<img src="AdobeStock_233585896.jpeg" alt="" aria-hidden="true">
+				</a>
 			</div>
 		</section>
 
@@ -122,14 +130,59 @@ In 1992, Congress passed legislation which permanently designated every May to b
 					<dd>First Asian American secretary of state of Maryland</dd>
 					<dt>Ethnicity</dt>
 					<dd>Chinese American</dd>
-					<dt>Susan's words</dt>
-					<dd>“I’m very proud to be Asian American, but I’m proud to be an American too. I think I have the best of both worlds, but, I think we bring a different perspective, particularly to the political table. We not only have our perspective from a newcomer or an immigrant group, but we also have the perspective from a woman, a person of color, but also the area that we represent, we’re in tune with those issues too, so you’re getting like 3 or 4 in one person. The diverse perspective makes for better laws because they are more inclusive and they’re more effective and they are more real.”</dd>
 				</dl>
 				<br>
-				<p class="bio-text">Bio for Susan Lee coming soon.</p>
-				<div class="bio-aapi-meaning">
-					<p class="bio-aapi-label">What does being Asian American mean to them</p>
-					<p class="bio-aapi-text"></p>
+				<p class="bio-text">Susan Lee has worn many hats throughout her career. </p>
+				<br>
+				<p class="bio-text">Born in Texas to a Chinese immigrant mother and a father of Chinese descent, Susan Lee moved to Maryland at a young age. She grew up in Montgomery County and later attended the University of Maryland and law school in San Francisco.</p>
+				<br>
+				<p class="bio-text">In California she found a strong Asian American community, but felt pulled back to Maryland because of its proximity to the nation’s capital. In 1998 she helped create the Coalition of Asian Pacific American Democrats of Maryland, which works to empower the AAPI community’s voice within the Democratic Party, Lee said.</p>
+				<br>
+				<p class="bio-text">She served over 20 years between the Maryland House of Delegates and the Maryland Senate, starting her first time in office in 2002. During her time in the legislature, she passed bills ranging from gun safety and fighting domestic violence to cyber security and consumer protection. While in the senate, she was the lead sponsor on a law to ban ghost guns.</p>
+				<br>
+				<p class="bio-text">In 2023, Gov. Wes Moore appointed Lee as Maryland's 72nd secretary of state. She is the first Asian American to hold that position, and previously broke barriers as the first Asian American elected to the Maryland Senate, according to the Maryland State Archives.</p>
+				<br>
+				<p class="bio-text">“I'm very honored to be the first, but I don't want to be the last, and I hope that the foundation that I've laid, that I continue to work to lay, will help our future generations,” Lee said. “Because without these future generations, we don't have a future.”</p>
+				<div class="bio-bubbles">
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">More words from Lee</p>
+						<p class="bio-aapi-text">“I’m very proud to be Asian American, but I’m proud to be an American too. I think I have the best of both worlds, but, I think we bring a different perspective, particularly to the political table.</p>
+					<br>
+						<p class="bio-aapi-text"> We not only have our perspective from a newcomer or an immigrant group, but we also have the perspective from a woman, a person of color, but also the area that we represent, we’re in tune with those issues too, so you’re getting like 3 or 4 in one person.</p>
+				<br>
+						<p class="bio-aapi-text">The diverse perspective makes for better laws because they are more inclusive and they’re more effective and they are more real.”</p>
+					</div>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-3">
+			<h2 class="bio-name">Steve Chu</h2>
+			<div class="bio-card">
+				<dl class="bio-details">
+					<dt>Career highlights</dt>
+					<dd>Co-founder of Ekiben</dd>
+					<dt>Ethnicity</dt>
+					<dd>Taiwanese American</dd>
+				</dl>
+				<br>
+				<p class="bio-text">Although Steve Chu grew up surrounded by family members in the restaurant industry, he wasn’t initially sure he wanted to become a chef.</p>
+				<br>
+				<p class="bio-text">It wasn’t until he got to college, at the University of Maryland, Baltimore County, that he realized that the restaurant business could become a creative outlet for him. He started Ekiben as a hot dog cart at a farmers market and just wanted to have fun with food. The restaurant now has four store front locations, one of which just opened in late April.</p>
+				<br>
+				<p class="bio-text">He and the other founders were able to combine their cultural influences with their experiences growing up in America into their food and business practices.</p>
+				<br>
+				<p class="bio-text">Describing himself as a “Maryland kid” Chu found an authenticity and pride in Maryland to base his business in that was hard to find anywhere else, he said. Known for their unique flavors and giant bao bun sandwiches, Ekiben has become a staple spot in Baltimore.</p>
+				<br>
+				<p class="bio-text">Chu was a semi-finalist in 2023 for a James Beard award, but you wouldn’t know that walking into his restaurant. It’s all a part of his goal to make sure Ekiben isn’t taking itself too seriously.</p>
+				<br>
+				<p class="bio-text">“There are always expectations and stereotypes when it comes to Asian food, but Ekiben’s been a really good platform to use to help people expand what they think is possible with Asian food in America.”</p>
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">More words from Chu</p>
+						<p class="bio-aapi-text">“I think that's something that many Asian Americans have in common is we're extremely hard workers because we just see how hard our parents have struggled just to survive here. </p>
+						<br>
+						<p class="bio-aapi-text">I think for me being Asian American, [the] biggest strength is being able to see the perseverance of our parents and being able to inherit that. And taking that strength and using that to push forward into our own hopes and dreams.”</p>
+					</div>
 				</div>
 				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
 			</div>
@@ -145,48 +198,25 @@ In 1992, Congress passed legislation which permanently designated every May to b
 					<dd>Indian American</dd>
 				</dl>
 				<br>
-				<p class="bio-text">Bio for Aruna Miller coming soon.</p>
-				<div class="bio-aapi-meaning">
-					<p class="bio-aapi-label">What does being Asian American mean to them</p>
-					<p class="bio-aapi-text"></p>
-				</div>
-				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
-			</div>
-		</section>
-
-		<section class="bio-section" id="person-3">
-			<h2 class="bio-name">Steve Chu</h2>
-			<div class="bio-card">
-				<dl class="bio-details">
-					<dt>Career highlights</dt>
-					<dd>Co-founder of Ekiben</dd>
-					<dt>Ethnicity</dt>
-					<dd>Taiwanese American</dd>
-				</dl>
+				<p class="bio-text">Aruna Miller likes to say she came to the East Coast for love.</p>
 				<br>
-				<p class="bio-text">Bio for Steve Chu coming soon.</p>
-				<div class="bio-aapi-meaning">
-					<p class="bio-aapi-label">What does being Asian American mean to them</p>
-					<p class="bio-aapi-text"></p>
-				</div>
-				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
-			</div>
-		</section>
-
-		<section class="bio-section" id="person-4">
-			<h2 class="bio-name">Yumi Hogan</h2>
-			<div class="bio-card">
-				<dl class="bio-details">
-					<dt>Career highlights</dt>
-					<dd>First Asian American First Lady of Maryland</dd>
-					<dt>Ethnicity</dt>
-					<dd>Korean American</dd>
-				</dl>
+				<p class="bio-text">She immigrated to the United States when she was seven-years-old from India, and primarily grew up in Missouri. There she became a civil engineer and also met her college sweetheart. She moved with him to Montgomery County, and became a transportation engineer for the county’s department of transportation.</p>
 				<br>
-				<p class="bio-text">Bio for Yumi Hogan coming soon.</p>
-				<div class="bio-aapi-meaning">
-					<p class="bio-aapi-label">What does being Asian American mean to them</p>
-					<p class="bio-aapi-text"></p>
+				<p class="bio-text">She remembers crying after voting in her first presidential election after becoming a naturalized citizen. Her candidate ultimately lost, which pushed her to become engaged with her local democratic party.</p>
+				<br>
+				<p class="bio-text">When a delegate seat opened up in her district she initially turned down requests to run saying she was an engineer not a politician. When reminded of her love of public service, she ran and won.</p>
+				<br>
+				<p class="bio-text">When Moore asked her to be on his ticket, Miller was told by some people that it went against conventional wisdom to put two people of color on the same campaign. The team won 64.7% of the vote and became the first Black and brown ticket to win in U.S. history. As lieutenant governor, she chairs the Interfaith council which brings faith leaders together across all religions.</p>
+				<br>
+				<p class="bio-text">“I spent most of my life trying to walk into spaces that  weren't created with me in mind,” Miller said. “That includes being an immigrant growing up in the Western world, being an Indian-American legislator in a legislature that looked nothing like me, being an engineer, a female engineer in a male-dominated field. But over the years, I realized that the idea is to walk into these spaces, and be exactly who you are.”</p>
+				<div class="bio-bubbles">
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">More words from Miller</p>
+						<p class="bio-aapi-text">“I'm really proud to represent the unique ability to be an Asian. When I bring my culture and how I was raised into the greater community of Marylanders or being an American or a lieutenant governor I think that makes what I have to offer so much different and unique from others perhaps.”</p>
+					<br>
+						<p class="bio-aapi-text">…There's so many Asians that live in our state, but each one of us comes with our own unique journeys and when we bring that to the table, I think that creates a stronger democracy and a stronger state being able to address the multiple diverse needs of Marylanders.”</p>
+					</div>
+					</div>
 				</div>
 				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
 			</div>
@@ -203,11 +233,73 @@ In 1992, Congress passed legislation which permanently designated every May to b
 				</dl>
 				<br>
 				<p class="bio-text">Bio for Tae Strain coming soon.</p>
-				<div class="bio-aapi-meaning">
-					<p class="bio-aapi-label">What does being Asian American mean to them</p>
-					<p class="bio-aapi-text"></p>
+				<div class="bio-bubbles">
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">Words</p>
+						<p class="bio-aapi-text">“I think what it means is to be equally proud of both places. The majority of my life, I would have identified as American Asian, simply from a comfort level and what it is to assimilate and feeling more comfortable around white friends. And I think how I view it now is that I identify firmly as Asian American. Being proud of both sides.”
+</p>
+					</div>
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">More words</p>
+						<p class="bio-aapi-text">More words coming soon.</p>
+					</div>
 				</div>
 				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="bio-section" id="person-4">
+			<h2 class="bio-name">Yumi Hogan</h2>
+			<div class="bio-card">
+				<dl class="bio-details">
+					<dt>Career highlights</dt>
+					<dd>First Asian American First Lady of Maryland</dd>
+					<dt>Ethnicity</dt>
+					<dd>Korean American</dd>
+				</dl>
+				<br>
+				<p class="bio-text">Bio for Yumi Hogan coming soon.</p>
+				<div class="bio-bubbles">
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">Words</p>
+						<p class="bio-aapi-text">“First I came and we [had] culture shock and language, food everything, but right now [the] second generation is much better, but we are very happy to see them growing…right now, I'm so happy.”
+</p>
+					</div>
+					<div class="bio-aapi-meaning">
+						<p class="bio-aapi-label">More words</p>
+						<p class="bio-aapi-text">More words coming soon.</p>
+					</div>
+				</div>
+				<a href="#people-nav" class="back-to-circles">&#8593; Back to all people</a>
+			</div>
+		</section>
+
+		<section class="future-aapi" id="future-aapi">
+			<h2 class="future-aapi-title">More AAPI Marylanders to follow</h2>
+			<p class="future-aapi-intro">AAPI individuals are breaking barriers across all industries. Here's five more to look out for this month.</p>
+			<div class="future-aapi-grid">
+				<article class="future-aapi-card">
+					<h3>Rei Ami</h3>
+					<p>Rei Ami, or Sarah Yeeun Lee, is a South Korean born and Montgomery County raised singer and actress. She is most known for her role as Zooey in the Oscar-winning <em>KPop Demon Hunters</em>, which was also the most streamed Netflix movie ever.</p>
+				</article>
+				<article class="future-aapi-card">
+					<h3>Utkarsh Ambudkar</h3>
+					<p>Utkarsh Ambudkar is a Baltimore-born and Montgomery County raised actor, rapper and singer known for roles in <em>Pitch Perfect</em>, <em>Ghosts</em> and <em>Never Have I Ever</em>. He recently released a new album titled <em>Too Beautiful</em></p>
+				</article>
+				<article class="future-aapi-card">
+					<h3>Bailey Anne Kennedy</h3>
+					<p>In 2024, Bailey Anne Kennedy became the first transgender woman to win Miss Maryland USA, as well as the first Asian American to win. The Cambodian immigrant grew up in Montgomery County and also serves as a volunteer for the United Service Organization.</p>
+				</article>
+				<article class="future-aapi-card">
+					<h3>Taulia Tagovailoa</h3>
+					<p>Taulia Tagovailoa is a professional football player, and former University of Maryland quarterback. In 2023, he was honored with the 2023 Polynesian College Football Offensive Player of the Year award. 
+</p>
+				</article>
+				<article class="future-aapi-card">
+					<h3>Connie Chung</h3>
+					<p>Connie Chung is a Montgomery County raised and University of Maryland graduate who was the first Asian American to anchor an evening news program. 
+</p>
+				</article>
 			</div>
 		</section>
 
